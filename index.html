@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080a08" />
+    <meta name="description" content="Fadel — Me in cyberspace." />
+    <title>Fadel — Me in cyberspace</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --page: #050505;
+        --card: #111411;
+        --card-hover: #171d17;
+        --text: #f5f5f5;
+        --muted: #a4a4a4;
+        --accent: #d4f28a;
+        --width: 500px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html { min-height: 100%; background: var(--page); scroll-behavior: smooth; }
+      body { margin: 0; min-height: 100vh; background: var(--page); color: var(--text); -webkit-font-smoothing: antialiased; }
+      a { color: inherit; }
+      a:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+
+      .profile { width: min(calc(100% - 24px), var(--width)); min-height: 100vh; margin: 0 auto; padding: 0 0 32px; }
+      .cover {
+        position: relative;
+        z-index: 0;
+        width: 100%;
+        aspect-ratio: .8 / 1;
+        overflow: visible;
+        background: var(--page);
+      }
+      .cover-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+      .cover-art {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(1.32) translate(-3%, -18%);
+        filter: saturate(.92) contrast(1.04);
+      }
+      .cover-shade {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        pointer-events: none;
+        /* Finish the fade before the transformed photo's lower edge. */
+        background: linear-gradient(
+          180deg,
+          rgba(5,5,5,0) 18%,
+          rgba(5,5,5,.035) 28%,
+          rgba(5,5,5,.12) 38%,
+          rgba(5,5,5,.28) 48%,
+          rgba(5,5,5,.50) 58%,
+          rgba(5,5,5,.72) 68%,
+          rgba(5,5,5,.88) 77%,
+          rgba(5,5,5,.97) 84%,
+          var(--page) 90%,
+          var(--page) 100%
+        );
+      }
+      .identity { position: absolute; z-index: 2; right: 25px; bottom: 42px; left: 25px; }
+      h1 { margin: 0 0 5px; font-size: clamp(44px, 12vw, 58px); line-height: .98; letter-spacing: -.065em; font-weight: 760; text-shadow: 0 2px 24px rgba(0,0,0,.2); }
+      .tagline { display: flex; align-items: center; gap: 7px; margin: 0; color: rgba(255,255,255,.83); font-size: 14px; line-height: 1.3; letter-spacing: .005em; }
+      .verified-badge { width: 16px; height: 16px; flex: 0 0 16px; }
+
+      .content { position: relative; z-index: 1; margin-top: -26px; padding: 0 clamp(22px, 6vw, 32px); }
+      .socials { display: flex; gap: 10px; align-items: center; padding: 0; margin: 0 0 22px -7px; }
+      .social-link {
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #f4f4f4;
+        color: #090909;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(0,0,0,.18);
+        transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+      }
+      .social-link:hover { transform: translateY(-3px); background: var(--accent); box-shadow: 0 8px 22px rgba(0,0,0,.28); }
+      .social-link svg { width: 19px; height: 19px; fill: currentColor; }
+      .social-link.linkedin span { font-size: 16px; font-weight: 800; letter-spacing: -.1em; transform: translateX(-.5px); }
+      .social-link.instagram svg { fill: none; stroke: currentColor; stroke-width: 2; }
+
+      .links { display: grid; gap: 11px; }
+      .link-card {
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 14px;
+        border: 1px solid rgba(255,255,255,.055);
+        border-radius: 15px;
+        background: linear-gradient(135deg, rgba(255,255,255,.035), transparent 65%), var(--card);
+        text-decoration: none;
+        box-shadow: 0 8px 24px rgba(0,0,0,.12);
+        transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      }
+      .link-card:hover { transform: translateY(-2px); border-color: rgba(212,242,138,.24); background: linear-gradient(135deg, rgba(212,242,138,.07), transparent 66%), var(--card-hover); }
+      .link-icon {
+        width: 24px;
+        height: 24px;
+        flex: 0 0 24px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border-radius: 50%;
+        background: #f4f4f4;
+        color: #111;
+      }
+      .link-icon svg { width: 13px; height: 13px; fill: currentColor; }
+      .link-icon.portfolio { background: #111; color: white; border: 1px solid #393939; }
+      .link-icon.portfolio svg { width: 14px; height: 14px; }
+      .link-copy { min-width: 0; }
+      .link-title { display: block; margin-bottom: 4px; font-size: 16px; font-weight: 680; letter-spacing: -.02em; }
+      .link-description { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; }
+      .link-arrow { margin-left: auto; color: #81887d; font-size: 17px; transition: color .18s ease, transform .18s ease; }
+      .link-card:hover .link-arrow { color: var(--accent); transform: translate(2px, -2px); }
+      .footer { padding: 34px 0 0; text-align: center; color: #72786e; font-size: 10px; letter-spacing: .04em; }
+      .footer a { color: #767676; text-decoration: none; }
+
+      @media (min-width: 700px) {
+        body { padding: 0; }
+        .profile { min-height: 100vh; }
+      }
+      @media (max-width: 699px) {
+        .profile { width: 100%; }
+        .cover { width: 100%; }
+        .identity { right: max(25px, calc(50vw - 225px)); left: max(25px, calc(50vw - 225px)); }
+        .content { width: min(calc(100% - 24px), var(--width)); margin: -26px auto 0; }
+      }
+      @media (max-width: 360px) {
+        .profile { width: 100%; }
+        .content { width: min(calc(100% - 16px), var(--width)); padding-right: 16px; padding-left: 16px; }
+        .identity { right: 20px; left: 20px; }
+        .link-title { font-size: 15px; }
+        .link-description { font-size: 13px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="profile">
+      <header class="cover">
+        <!-- Ganti cover-photo.jpg dengan foto sampul pilihanmu. -->
+        <div class="cover-media">
+          <img class="cover-art" src="cover-photo.jpg" alt="Fadel di kawasan pegunungan" />
+          <div class="cover-shade" aria-hidden="true"></div>
+        </div>
+        <div class="identity">
+          <h1>Fadel</h1>
+          <p class="tagline">
+            <svg class="verified-badge" viewBox="0 0 24 24" role="img" aria-label="Centang biru">
+              <path fill="#3984ff" d="m12 1.5 2.25 1.43 2.66-.18 1.1 2.43 2.43 1.1-.18 2.66L21.7 11.2l-1.43 2.25.18 2.66-2.43 1.1-1.1 2.43-2.66-.18L12 20.9l-2.25-1.43-2.66.18-1.1-2.43-2.43-1.1.18-2.66L2.3 11.2l1.43-2.25-.18-2.66 2.43-1.1 1.1-2.43 2.66.18L12 1.5Z"/>
+              <path d="m7.6 11.8 2.9 2.8 5.9-6" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </svg>
+            <span>Me in cyberspace</span>
+          </p>
+        </div>
+      </header>
+
+      <div class="content">
+        <nav class="socials" aria-label="Media sosial">
+          <a class="social-link linkedin" href="https://linkedin.com/in/fadellmuhammad/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+            <span aria-hidden="true">in</span>
+          </a>
+          <a class="social-link" href="https://github.com/fadelmvi" target="_blank" rel="noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.32-3.76-1.32-.5-1.27-1.23-1.61-1.23-1.61-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.23.93.1-.72.39-1.21.7-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.21 1.15-2.99-.11-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.22 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.61 5.23-5.1 5.51.4.34.75 1 .75 2.02v3.01c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+          </a>
+          <a class="social-link instagram" href="https://instagram.com/fadelmvi" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.1" y="3.1" width="17.8" height="17.8" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.7" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </nav>
+
+        <section class="links" aria-label="Tautan pilihan">
+          <a class="link-card" href="https://fadelmvi.github.io/portfolio/" target="_blank" rel="noreferrer">
+            <span class="link-icon portfolio" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 22 21H2L12 3Zm0 5.4L6.8 18h10.4L12 8.4Z"/></svg></span>
+            <span class="link-copy"><span class="link-title">fadelmvi.github.io</span><span class="link-description">my portfolio</span></span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="link-card" href="https://fadelmvi.github.io/space/" target="_blank" rel="noreferrer">
+            <span class="link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.4a9.6 9.6 0 1 0 0 19.2 9.6 9.6 0 0 0 0-19.2Zm0 2a7.6 7.6 0 1 1 0 15.2 7.6 7.6 0 0 1 0-15.2Zm0 2.4a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4Zm0 2.1a3.1 3.1 0 1 1 0 6.2 3.1 3.1 0 0 1 0-6.2Z"/></svg></span>
+            <span class="link-copy"><span class="link-title">fadelmvi.github.io</span><span class="link-description">A space for articles and insights.</span></span>
+            <span class="link-arrow" aria-hidden="true">↗</span>
+          </a>
+        </section>
+
+        <footer class="footer">A little corner of my internet · © Fadel</footer>
+      </div>
+    </main>
+  </body>
+</html>

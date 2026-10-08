@@ -93,6 +93,8 @@
       .links { display: grid; gap: 11px; }
       .link-card {
         min-height: 80px;
+        width: 100%;
+        min-width: 0;
         display: flex;
         align-items: center;
         gap: 12px;
@@ -119,7 +121,7 @@
       .link-icon svg { width: 13px; height: 13px; fill: currentColor; }
       .link-icon.portfolio { background: #111; color: white; border: 1px solid #393939; }
       .link-icon.portfolio svg { width: 14px; height: 14px; }
-      .link-copy { min-width: 0; }
+      .link-copy { min-width: 0; flex: 1; }
       .link-title { display: block; margin-bottom: 4px; font-size: 16px; font-weight: 680; letter-spacing: -.02em; }
       .link-description { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; }
       .link-arrow { margin-left: auto; color: #81887d; font-size: 17px; transition: color .18s ease, transform .18s ease; }
@@ -185,12 +187,12 @@
         <section class="links" aria-label="Tautan pilihan">
           <a class="link-card" href="https://fadelmvi.github.io/portfolio/" target="_blank" rel="noreferrer">
             <span class="link-icon portfolio" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 22 21H2L12 3Zm0 5.4L6.8 18h10.4L12 8.4Z"/></svg></span>
-            <span class="link-copy"><span class="link-title">fadelmvi.github.io</span><span class="link-description">my portfolio</span></span>
+            <span class="link-copy"><span class="link-title">Portfolio</span><span class="link-description">my portfolio</span></span>
             <span class="link-arrow" aria-hidden="true">↗</span>
           </a>
           <a class="link-card" href="https://fadelmvi.github.io/space/" target="_blank" rel="noreferrer">
             <span class="link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.4a9.6 9.6 0 1 0 0 19.2 9.6 9.6 0 0 0 0-19.2Zm0 2a7.6 7.6 0 1 1 0 15.2 7.6 7.6 0 0 1 0-15.2Zm0 2.4a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4Zm0 2.1a3.1 3.1 0 1 1 0 6.2 3.1 3.1 0 0 1 0-6.2Z"/></svg></span>
-            <span class="link-copy"><span class="link-title">fadelmvi.github.io</span><span class="link-description">A space for articles and insights.</span></span>
+            <span class="link-copy"><span class="link-title">Thinkspace</span><span class="link-description">A space for articles and insights.</span></span>
             <span class="link-arrow" aria-hidden="true">↗</span>
           </a>
         </section>
